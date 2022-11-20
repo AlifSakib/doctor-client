@@ -18,7 +18,11 @@ const AppointmentBanner = ({ selected, setSelected }) => {
             <DayPicker
               mode="single"
               selected={selected}
-              onSelect={setSelected}
+              onSelect={(currentData) => {
+                if (currentData) {
+                  setSelected(currentData);
+                }
+              }}
               footer={footer}
             />
           </div>
