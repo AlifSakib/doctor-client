@@ -1,21 +1,28 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-
 const Register = () => {
+  const { register, handleSubmit } = useForm();
+  const handleRegister = (data) => {
+    console.log(data);
+  };
   return (
     <div>
-      <section class="bg-white dark:bg-gray-900">
-        <div class="container flex items-center justify-center min-h-screen px-6 mx-auto">
-          <form class="w-full max-w-md">
-            <h1 class="text-3xl font-semibold tracking-wide text-center text-gray-800 capitalize md:text-5xl dark:text-white">
+      <section className="bg-white dark:bg-gray-900">
+        <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
+          <form
+            onSubmit={handleSubmit(handleRegister)}
+            className="w-full max-w-md"
+          >
+            <h1 className="text-3xl font-semibold tracking-wide text-center text-gray-800 capitalize md:text-5xl dark:text-white">
               Create Account
             </h1>
 
-            <div class="relative flex items-center mt-8">
-              <span class="absolute">
+            <div className="relative flex items-center mt-8">
+              <span className="absolute">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
+                  className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -31,18 +38,19 @@ const Register = () => {
 
               <input
                 type="text"
-                class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                className="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 placeholder="Username"
+                {...register("name")}
               />
             </div>
 
             <label
               for="dropzone-file"
-              class="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-white border-2 border-dashed rounded-md cursor-pointer dark:border-gray-600 dark:bg-gray-900"
+              className="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-white border-2 border-dashed rounded-md cursor-pointer dark:border-gray-600 dark:bg-gray-900"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="w-6 h-6 text-gray-300 dark:text-gray-500"
+                className="w-6 h-6 text-gray-300 dark:text-gray-500"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -54,17 +62,20 @@ const Register = () => {
                   d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
                 />
               </svg>
-
-              <h2 class="mx-3 text-gray-400">Profile Photo</h2>
-
-              <input id="dropzone-file" type="file" class="hidden" />
+              <h2 className="mx-3 text-gray-400">Profile Photo</h2>
+              <input
+                id="dropzone-file"
+                type="file"
+                className="hidden"
+                {...register("image")}
+              />
             </label>
 
-            <div class="relative flex items-center mt-6">
-              <span class="absolute">
+            <div className="relative flex items-center mt-6">
+              <span className="absolute">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
+                  className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -80,16 +91,17 @@ const Register = () => {
 
               <input
                 type="email"
-                class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                className="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 placeholder="Email address"
+                {...register("email")}
               />
             </div>
 
-            <div class="relative flex items-center mt-4">
-              <span class="absolute">
+            <div className="relative flex items-center mt-4">
+              <span className="absolute">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
+                  className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -105,16 +117,17 @@ const Register = () => {
 
               <input
                 type="password"
-                class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 placeholder="Password"
+                {...register("password")}
               />
             </div>
 
-            <div class="relative flex items-center mt-4">
-              <span class="absolute">
+            <div className="relative flex items-center mt-4">
+              <span className="absolute">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
+                  className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -130,20 +143,23 @@ const Register = () => {
 
               <input
                 type="password"
-                class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 placeholder="Confirm Password"
               />
             </div>
 
-            <div class="mt-6">
-              <button class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+            <div className="mt-6">
+              <button
+                className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                type="submit"
+              >
                 Sign Up
               </button>
 
-              <div class="mt-6 text-center ">
+              <div className="mt-6 text-center ">
                 <Link
                   to="/login"
-                  class="text-sm text-blue-500 hover:underline dark:text-blue-400"
+                  className="text-sm text-blue-500 hover:underline dark:text-blue-400"
                 >
                   Already have an account?
                 </Link>
