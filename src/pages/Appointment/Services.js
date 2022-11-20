@@ -1,8 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
+import BookingModal from "./BookingModal";
 import Service from "./service";
 
 const Services = () => {
+  let [isOpen, setIsOpen] = useState(true);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
   const { data: services = [] } = useQuery({
     queryKey: ["services"],
     queryFn: async () => {
@@ -20,10 +31,23 @@ const Services = () => {
       <section className=" dark:bg-gray-800 dark:text-gray-100 w-9/12 mx-auto">
         <div className=" grid gap-6 text-center lg:grid-cols-2 xl:grid-cols-3">
           {services.map((service) => (
-            <Service key={service._id} service={service}></Service>
+            <Service
+              key={service._id}
+              service={service}
+              openModal={openModal}
+              isOpen={isOpen}
+              closeModal={closeModal}
+              setIsOpen={setIsOpen}
+            ></Service>
           ))}
         </div>
       </section>
+      <BookingModal
+        openModal={openModal}
+        isOpen={isOpen}
+        closeModal={closeModal}
+        setIsOpen={setIsOpen}
+      ></BookingModal>
     </div>
   );
 };

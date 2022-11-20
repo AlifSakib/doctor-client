@@ -1,7 +1,8 @@
 import React from "react";
 
-const Service = ({ service }) => {
+const Service = ({ service, openModal }) => {
   const { name, slots } = service;
+
   return (
     <div>
       <div className=" rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100">
@@ -14,6 +15,7 @@ const Service = ({ service }) => {
             </p>
           </div>
           <button
+            onClick={openModal}
             type="button"
             className="flex items-center justify-center w-full bg-violet-400 p-3 font-semibold tracking-wide rounded-md dark:bg-violet-400 dark:text-gray-900"
           >
