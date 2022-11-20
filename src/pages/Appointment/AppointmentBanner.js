@@ -20,12 +20,12 @@ const AppointmentBanner = () => {
               cumque at.
             </p>
             <form
-              novalidate=""
+              noValidate=""
               action=""
               className="self-stretch space-y-3 ng-untouched ng-pristine ng-valid"
             >
               <div>
-                <label for="name" className="text-sm sr-only">
+                <label htmlFor="name" className="text-sm sr-only">
                   Your name
                 </label>
                 <input
