@@ -5,7 +5,17 @@ import { useForm } from "react-hook-form";
 export default function BookingModal({ isOpen, closeModal, selectedService }) {
   const { register, handleSubmit } = useForm();
   const handleBooking = (data) => {
-    console.log(data);
+    const bookingDetails = {
+      serviceName: selectedService.name,
+      service_id: selectedService._id,
+      date: data.date,
+      time: data.time,
+      name: data.name,
+      phone: data.phone,
+      email: data.email,
+    };
+
+    console.log(bookingDetails);
   };
   const { slots = [] } = selectedService;
 
