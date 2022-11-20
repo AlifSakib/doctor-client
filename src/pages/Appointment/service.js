@@ -2,6 +2,10 @@ import React from "react";
 
 const Service = ({ service, openModal }) => {
   const { name, slots } = service;
+  const handleService = () => {
+    openModal();
+    console.log(name);
+  };
 
   return (
     <div>
@@ -15,7 +19,7 @@ const Service = ({ service, openModal }) => {
             </p>
           </div>
           <button
-            onClick={openModal}
+            onClick={handleService}
             type="button"
             className="flex items-center justify-center w-full bg-violet-400 p-3 font-semibold tracking-wide rounded-md dark:bg-violet-400 dark:text-gray-900"
           >

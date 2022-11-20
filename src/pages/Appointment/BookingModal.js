@@ -1,12 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
-export default function BookingModal({
-  isOpen,
-  setIsOpen,
-  closeModal,
-  openModal,
-}) {
+export default function BookingModal({ isOpen, closeModal }) {
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
