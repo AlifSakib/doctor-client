@@ -1,6 +1,6 @@
 import React from "react";
 
-const Service = ({ service, openModal, setSelectedService, handleService }) => {
+const Service = ({ service, handleService }) => {
   const { name, slots } = service;
   //   const handleService = () => {
   //     openModal();
