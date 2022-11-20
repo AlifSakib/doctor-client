@@ -1,7 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { useForm } from "react-hook-form";
 
-export default function BookingModal({ isOpen, closeModal }) {
+export default function BookingModal({ isOpen, closeModal, selectedService }) {
+  const { register, handleSubmit } = useForm();
+  const handleBooking = (data) => {
+    console.log(data);
+  };
+  const { slots = [] } = selectedService;
+
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -34,24 +41,94 @@ export default function BookingModal({ isOpen, closeModal }) {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Payment successful
+                    {selectedService.name}
                   </Dialog.Title>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Your payment has been successfully submitted. We’ve sent
-                      you an email with all of the details of your order.
-                    </p>
-                  </div>
+                  <form onSubmit={handleSubmit(handleBooking)}>
+                    <div>
+                      <label
+                        className="text-gray-700 dark:text-gray-200"
+                        htmlFor="date"
+                      >
+                        Date
+                      </label>
+                      <input
+                        type="text"
+                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                        {...register("date")}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        className="text-gray-700 dark:text-gray-200"
+                        htmlFor="date"
+                      >
+                        Time
+                      </label>
+                      <select
+                        className="block w-full px-4 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                        name="time"
+                        {...register("time")}
+                      >
+                        {slots.map((slot, i) => (
+                          <option key={i} value={slot}>
+                            {slot}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
 
-                  <div className="mt-4">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Got it, thanks!
-                    </button>
-                  </div>
+                    <div>
+                      <label
+                        className="text-gray-700 dark:text-gray-200"
+                        htmlFor="fullname"
+                      >
+                        Full Name
+                      </label>
+                      <input
+                        id="fullname"
+                        type="text"
+                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                        {...register("name")}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        className="text-gray-700 dark:text-gray-200"
+                        htmlFor="phone-number"
+                      >
+                        Phone Number
+                      </label>
+                      <input
+                        id="phone-number"
+                        type="text"
+                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                        {...register("phone")}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        className="text-gray-700 dark:text-gray-200"
+                        htmlFor="Email"
+                      >
+                        Email
+                      </label>
+                      <input
+                        id="email"
+                        type="text"
+                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                        {...register("email")}
+                      />
+                    </div>
+                    <div className="mt-4">
+                      <button
+                        type="submit"
+                        className="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        onClick={closeModal}
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </form>
                 </Dialog.Panel>
               </Transition.Child>
             </div>

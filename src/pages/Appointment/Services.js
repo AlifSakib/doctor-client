@@ -4,7 +4,8 @@ import BookingModal from "./BookingModal";
 import Service from "./service";
 
 const Services = () => {
-  let [isOpen, setIsOpen] = useState(true);
+  const [selectedService, setSelectedService] = useState([]);
+  let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
     setIsOpen(false);
@@ -13,6 +14,11 @@ const Services = () => {
   function openModal() {
     setIsOpen(true);
   }
+
+  const handleService = (service) => {
+    openModal();
+    setSelectedService(service);
+  };
 
   const { data: services = [] } = useQuery({
     queryKey: ["services"],
@@ -38,6 +44,8 @@ const Services = () => {
               isOpen={isOpen}
               closeModal={closeModal}
               setIsOpen={setIsOpen}
+              setSelectedService={setSelectedService}
+              handleService={handleService}
             ></Service>
           ))}
         </div>
@@ -47,6 +55,7 @@ const Services = () => {
         isOpen={isOpen}
         closeModal={closeModal}
         setIsOpen={setIsOpen}
+        selectedService={selectedService}
       ></BookingModal>
     </div>
   );
