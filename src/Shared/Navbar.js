@@ -52,10 +52,10 @@ const Navbar = () => {
             <li className="flex">
               <Link
                 rel="noopener noreferrer"
-                href="#"
+                to="/dashboard"
                 className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent"
               >
-                Link
+                Dashboard
               </Link>
             </li>
             <li className="flex">
