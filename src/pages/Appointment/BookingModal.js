@@ -1,10 +1,31 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { format } from "date-fns";
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
+import { useForm } from "react-hook-form";
+import { AuthContext } from "../../context/AuthProvider";
 
 const BookingModal = ({ isOpen, closeModal, selected, selectedService }) => {
-  const { name, slots } = selectedService;
+  const { user } = useContext(AuthContext);
+  const { name, slots = [] } = selectedService;
   const date = format(selected, "PP");
+  const { register, handleSubmit } = useForm();
+
+  const handleBooking = (e) => {
+    e.preventDefault();
+    let form = e.target;
+    const bookingDetails = {
+      name: form.name.value,
+      email: form.email.value,
+      date: form.date.value,
+      time: form.time.value,
+      phone: form.phone.value,
+      serviceName: selectedService.name,
+      serviceId: selectedService._id,
+    };
+
+    console.log(bookingDetails);
+  };
+
   return (
     <div>
       <>
@@ -40,7 +61,7 @@ const BookingModal = ({ isOpen, closeModal, selected, selectedService }) => {
                     >
                       {name}
                     </Dialog.Title>
-                    <form action="">
+                    <form onSubmit={handleBooking} action="">
                       <div class="flex justify-center">
                         <div class="mb-3 xl:w-96">
                           <label
@@ -51,10 +72,13 @@ const BookingModal = ({ isOpen, closeModal, selected, selectedService }) => {
                           </label>
                           <input
                             type="text"
+                            disabled
                             defaultValue={date}
                             className=" form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             id="exampleFormControlInput1"
                             placeholder="Appointment Date"
+                            name="date"
+                            // {...register("date")}
                           />
                         </div>
                       </div>
@@ -70,6 +94,8 @@ const BookingModal = ({ isOpen, closeModal, selected, selectedService }) => {
                             className=" form-control block w-full px-3 py-2.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             id="exampleFormControlInput1"
                             placeholder="Appointment Time"
+                            name="time"
+                            // {...register("time")}
                           >
                             {slots.map((slot, i) => (
                               <option key={i} value={slot}>
@@ -89,9 +115,12 @@ const BookingModal = ({ isOpen, closeModal, selected, selectedService }) => {
                           </label>
                           <input
                             type="text"
+                            defaultValue={user?.email}
                             className=" form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             id="exampleFormControlInput1"
                             placeholder="Patient Emai"
+                            name="email"
+                            // {...register("email")}
                           />
                         </div>
                       </div>
@@ -108,6 +137,8 @@ const BookingModal = ({ isOpen, closeModal, selected, selectedService }) => {
                             className=" form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             id="exampleFormControlInput1"
                             placeholder="Phone"
+                            name="phone"
+                            // {...register("phone")}
                           />
                         </div>
                       </div>
@@ -121,23 +152,25 @@ const BookingModal = ({ isOpen, closeModal, selected, selectedService }) => {
                           </label>
                           <input
                             type="text"
+                            defaultValue={user?.displayName}
                             className=" form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             id="exampleFormControlInput1"
                             placeholder="Patient Name"
+                            name="name"
+                            // {...register("name")}
                           />
                         </div>
                       </div>
+                      <div className="mt-4">
+                        <button
+                          type="submit"
+                          className="w-full inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                          onClick={closeModal}
+                        >
+                          Confirm Booking
+                        </button>
+                      </div>
                     </form>
-
-                    <div className="mt-4">
-                      <button
-                        type="button"
-                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                        onClick={closeModal}
-                      >
-                        Got it, thanks!
-                      </button>
-                    </div>
                   </Dialog.Panel>
                 </Transition.Child>
               </div>
