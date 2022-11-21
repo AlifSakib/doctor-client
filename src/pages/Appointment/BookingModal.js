@@ -1,6 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { format } from "date-fns";
 import React, { Fragment, useContext } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../context/AuthProvider";
 
 const BookingModal = ({
@@ -39,6 +40,8 @@ const BookingModal = ({
         if (data.success) {
           console.log("Done");
           refetch();
+        } else {
+          toast.error(data.message);
         }
       });
   };
