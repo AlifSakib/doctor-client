@@ -36,6 +36,15 @@ const Register = () => {
             })
               .then(() => {
                 toast.success("Profile Updated");
+                fetch("http://localhost:5000/users", {
+                  method: "POST",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify(userDetails),
+                })
+                  .then((res) => res.json())
+                  .then((data) => toast.success(data.message));
               })
               .catch((error) => toast.error("Profile Update Failed"));
             console.log(result.user);
