@@ -1,11 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider";
+import useToken from "../../../Hooks/useToken";
 const Register = () => {
   const { createUser, updateUser } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
+  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
+  const [token] = useToken(email);
+
+  if (token) {
+    navigate("/");
+  }
+
   const handleRegister = (data) => {
     const image = data.image[0];
     const formData = new FormData();
@@ -44,14 +53,19 @@ const Register = () => {
                   body: JSON.stringify(userDetails),
                 })
                   .then((res) => res.json())
-                  .then((data) => toast.success(data.message));
+                  .then((data) => {
+                    setEmail(userDetails.email);
+                    toast.success(data.message);
+                  });
               })
               .catch((error) => toast.error("Profile Update Failed"));
             console.log(result.user);
           })
+
           .catch((error) => console.log(error.message));
       });
   };
+
   return (
     <div>
       <section className="bg-white dark:bg-gray-900">
