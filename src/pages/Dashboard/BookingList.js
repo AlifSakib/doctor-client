@@ -16,48 +16,44 @@ const BookingList = () => {
   });
   return (
     <div>
-      {loading ? (
-        "loading"
-      ) : (
-        <div className="overflow-x-auto relative mt-6">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" className="py-3 px-6">
-                  Treatment
-                </th>
-                <th scope="col" className="py-3 px-6">
-                  Date
-                </th>
-                <th scope="col" className="py-3 px-6">
-                  Time
-                </th>
-                <th scope="col" className="py-3 px-6">
-                  Price
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {bookings.map((booking) => (
-                <tr
-                  key={booking._id}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+      <div className="overflow-x-auto relative mt-6">
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" className="py-3 px-6">
+                Treatment
+              </th>
+              <th scope="col" className="py-3 px-6">
+                Date
+              </th>
+              <th scope="col" className="py-3 px-6">
+                Time
+              </th>
+              <th scope="col" className="py-3 px-6">
+                Price
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookings.map((booking) => (
+              <tr
+                key={booking._id}
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+              >
+                <th
+                  scope="row"
+                  className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  <th
-                    scope="row"
-                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    {booking.treatment}
-                  </th>
-                  <td className="py-4 px-6">{booking.appointmentDate}</td>
-                  <td className="py-4 px-6">{booking.slot}</td>
-                  <td className="py-4 px-6">$2999</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+                  {booking.treatment}
+                </th>
+                <td className="py-4 px-6">{booking.appointmentDate}</td>
+                <td className="py-4 px-6">{booking.slot}</td>
+                <td className="py-4 px-6">$2999</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
