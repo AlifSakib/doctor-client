@@ -7,6 +7,7 @@ import Appointment from "../pages/Appointment/Appointment";
 import AllUsers from "../pages/Dashboard/AllUsers";
 import DashboardHome from "../pages/Dashboard/DashboardHome";
 import Home from "../pages/Home/Home";
+import AdminROute from "./AdminROute";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -40,7 +41,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/allusers",
-        element: <AllUsers></AllUsers>,
+        element: (
+          <AdminROute>
+            <AllUsers></AllUsers>
+          </AdminROute>
+        ),
       },
     ],
   },
