@@ -1,29 +1,46 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { format } from "date-fns";
 import React, { Fragment, useContext } from "react";
-import { useForm } from "react-hook-form";
 import { AuthContext } from "../../context/AuthProvider";
 
-const BookingModal = ({ isOpen, closeModal, selected, selectedService }) => {
+const BookingModal = ({
+  isOpen,
+  closeModal,
+  selected,
+  selectedService,
+  refetch,
+}) => {
   const { user } = useContext(AuthContext);
   const { name, slots = [] } = selectedService;
   const date = format(selected, "PP");
-  const { register, handleSubmit } = useForm();
 
   const handleBooking = (e) => {
     e.preventDefault();
     let form = e.target;
     const bookingDetails = {
-      name: form.name.value,
+      patient: form.name.value,
       email: form.email.value,
-      date: form.date.value,
-      time: form.time.value,
+      appointmentDate: form.date.value,
+      slot: form.time.value,
       phone: form.phone.value,
-      serviceName: selectedService.name,
+      treatment: selectedService.name,
       serviceId: selectedService._id,
     };
 
-    console.log(bookingDetails);
+    fetch("http://localhost:5000/bookings", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(bookingDetails),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          console.log("Done");
+          refetch();
+        }
+      });
   };
 
   return (
@@ -62,11 +79,11 @@ const BookingModal = ({ isOpen, closeModal, selected, selectedService }) => {
                       {name}
                     </Dialog.Title>
                     <form onSubmit={handleBooking} action="">
-                      <div class="flex justify-center">
-                        <div class="mb-3 xl:w-96">
+                      <div className="flex justify-center">
+                        <div className="mb-3 xl:w-96">
                           <label
-                            for="exampleFormControlInput1"
-                            class="form-label inline-block mb-2 text-gray-700"
+                            htmlFor="exampleFormControlInput1"
+                            className="form-label inline-block mb-2 text-gray-700"
                           >
                             Appointment Date
                           </label>
@@ -82,11 +99,11 @@ const BookingModal = ({ isOpen, closeModal, selected, selectedService }) => {
                           />
                         </div>
                       </div>
-                      <div class="flex justify-center">
-                        <div class="mb-3 xl:w-96">
+                      <div className="flex justify-center">
+                        <div className="mb-3 xl:w-96">
                           <label
-                            for="exampleFormControlInput1"
-                            class="form-label inline-block mb-2 text-gray-700"
+                            htmlFor="exampleFormControlInput1"
+                            className="form-label inline-block mb-2 text-gray-700"
                           >
                             Appointment Time
                           </label>
@@ -105,11 +122,11 @@ const BookingModal = ({ isOpen, closeModal, selected, selectedService }) => {
                           </select>
                         </div>
                       </div>
-                      <div class="flex justify-center">
-                        <div class="mb-3 xl:w-96">
+                      <div className="flex justify-center">
+                        <div className="mb-3 xl:w-96">
                           <label
-                            for="exampleFormControlInput1"
-                            class="form-label inline-block mb-2 text-gray-700"
+                            htmlFor="exampleFormControlInput1"
+                            className="form-label inline-block mb-2 text-gray-700"
                           >
                             Patient Email
                           </label>
@@ -124,11 +141,11 @@ const BookingModal = ({ isOpen, closeModal, selected, selectedService }) => {
                           />
                         </div>
                       </div>
-                      <div class="flex justify-center">
-                        <div class="mb-3 xl:w-96">
+                      <div className="flex justify-center">
+                        <div className="mb-3 xl:w-96">
                           <label
-                            for="exampleFormControlInput1"
-                            class="form-label inline-block mb-2 text-gray-700"
+                            htmlFor="exampleFormControlInput1"
+                            className="form-label inline-block mb-2 text-gray-700"
                           >
                             Phone
                           </label>
@@ -142,11 +159,11 @@ const BookingModal = ({ isOpen, closeModal, selected, selectedService }) => {
                           />
                         </div>
                       </div>
-                      <div class="flex justify-center">
-                        <div class="mb-3 xl:w-96">
+                      <div className="flex justify-center">
+                        <div className="mb-3 xl:w-96">
                           <label
-                            for="exampleFormControlInput1"
-                            class="form-label inline-block mb-2 text-gray-700"
+                            htmlFor="exampleFormControlInput1"
+                            className="form-label inline-block mb-2 text-gray-700"
                           >
                             Patient Name
                           </label>

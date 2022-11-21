@@ -7,6 +7,7 @@ import Service from "./service";
 const Services = ({ selected, setSelected }) => {
   let [isOpen, setIsOpen] = useState(false);
   let [selectedService, setSelectedService] = useState([]);
+  const date = format(selected, "PP");
 
   function closeModal() {
     setIsOpen(false);
@@ -15,10 +16,12 @@ const Services = ({ selected, setSelected }) => {
   function openModal() {
     setIsOpen(true);
   }
-  const { data: services = [] } = useQuery({
-    queryKey: ["services"],
+  const { data: services = [], refetch } = useQuery({
+    queryKey: ["services", date],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/appointments");
+      const res = await fetch(
+        `http://localhost:5000/appointments?date=${date}`
+      );
       const data = await res.json();
       return data;
     },
@@ -53,6 +56,7 @@ const Services = ({ selected, setSelected }) => {
         closeModal={closeModal}
         selected={selected}
         selectedService={selectedService}
+        refetch={refetch}
       ></BookingModal>
     </div>
   );
