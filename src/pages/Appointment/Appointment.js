@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import AppointmentBanner from "./AppointmentBanner";
 import Services from "./Services";
 
 const Appointment = () => {
-  const [selected, setSelected] = React.useState(new Date());
+  const [selected, setSelected] = useState(new Date());
 
   return (
     <div>

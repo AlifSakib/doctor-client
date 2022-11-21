@@ -1,7 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthProvider";
 
 const Navbar = () => {
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
   return (
     <div>
       <header className="p-4 dark:bg-gray-800 dark:text-gray-100">
@@ -62,15 +69,28 @@ const Navbar = () => {
             </li>
           </ul>
           <div className="items-center flex-shrink-0 hidden lg:flex">
-            <Link to="login" className="self-center px-8 py-3 rounded">
-              Login
-            </Link>
-            <Link
-              to="register"
-              className="self-center px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900"
-            >
-              Register
-            </Link>
+            {user?.uid ? (
+              <>
+                <button
+                  onClick={handleLogout}
+                  className="self-center px-8 py-3 rounded"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="login" className="self-center px-8 py-3 rounded">
+                  Login
+                </Link>
+                <Link
+                  to="register"
+                  className="self-center px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900"
+                >
+                  Register
+                </Link>
+              </>
+            )}
           </div>
           <button className="p-4 lg:hidden">
             <svg

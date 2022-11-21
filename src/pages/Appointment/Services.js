@@ -5,8 +5,8 @@ import BookingModal from "./BookingModal";
 import Service from "./service";
 
 const Services = ({ selected, setSelected }) => {
-  const [selectedService, setSelectedService] = useState([]);
   let [isOpen, setIsOpen] = useState(false);
+  let [selectedService, setSelectedService] = useState([]);
 
   function closeModal() {
     setIsOpen(false);
@@ -15,12 +15,6 @@ const Services = ({ selected, setSelected }) => {
   function openModal() {
     setIsOpen(true);
   }
-
-  const handleService = (service) => {
-    openModal();
-    setSelectedService(service);
-  };
-
   const { data: services = [] } = useQuery({
     queryKey: ["services"],
     queryFn: async () => {
@@ -29,6 +23,11 @@ const Services = ({ selected, setSelected }) => {
       return data;
     },
   });
+
+  const handleService = (service) => {
+    openModal();
+    setSelectedService(service);
+  };
 
   return (
     <div>
@@ -42,21 +41,17 @@ const Services = ({ selected, setSelected }) => {
               key={service._id}
               service={service}
               openModal={openModal}
-              isOpen={isOpen}
-              closeModal={closeModal}
-              setIsOpen={setIsOpen}
-              setSelectedService={setSelectedService}
               handleService={handleService}
             ></Service>
           ))}
         </div>
       </section>
       <BookingModal
-        selected={selected}
-        openModal={openModal}
         isOpen={isOpen}
-        closeModal={closeModal}
         setIsOpen={setIsOpen}
+        openModal={openModal}
+        closeModal={closeModal}
+        selected={selected}
         selectedService={selectedService}
       ></BookingModal>
     </div>

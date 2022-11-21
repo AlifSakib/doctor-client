@@ -25,6 +25,7 @@ const Register = () => {
           email: data.email,
           password: data.password,
           image: imageData.data.display_url,
+          phone: data.phone,
         };
         createUser(data.email, data.password)
           .then((result) => {
@@ -159,7 +160,7 @@ const Register = () => {
               />
             </div>
 
-            {/* <div className="relative flex items-center mt-4">
+            <div className="relative flex items-center mt-4">
               <span className="absolute">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -178,11 +179,12 @@ const Register = () => {
               </span>
 
               <input
-                type="password"
+                type="text"
                 className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                placeholder="Confirm Password"
+                placeholder="Phone Number"
+                {...register("phone")}
               />
-            </div> */}
+            </div>
 
             <div className="mt-6">
               <button
