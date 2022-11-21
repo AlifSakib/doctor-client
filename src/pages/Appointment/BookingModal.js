@@ -38,7 +38,7 @@ const BookingModal = ({
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          console.log("Done");
+          toast.success(data.message);
           refetch();
         } else {
           toast.error(data.message);
