@@ -12,7 +12,8 @@ const BookingModal = ({
   refetch,
 }) => {
   const { user } = useContext(AuthContext);
-  const { name, slots = [] } = selectedService;
+  const { name, slots = [], price } = selectedService;
+
   const date = format(selected, "PP");
 
   const handleBooking = (e) => {
@@ -26,7 +27,10 @@ const BookingModal = ({
       phone: form.phone.value,
       treatment: selectedService.name,
       serviceId: selectedService._id,
+      price: price,
     };
+
+    console.log(bookingDetails);
 
     fetch("http://localhost:5000/bookings", {
       method: "POST",

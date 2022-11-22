@@ -1,7 +1,7 @@
 import React from "react";
 
 const Service = ({ service, openModal, handleService }) => {
-  const { name, slots } = service;
+  const { name, slots, price } = service;
 
   return (
     <div>
@@ -13,6 +13,7 @@ const Service = ({ service, openModal, handleService }) => {
             <p className="dark:text-gray-100">
               {slots.length} spaces available{" "}
             </p>
+            <p className="dark:text-gray-100">Fee : {price}$</p>
           </div>
           <button
             onClick={() => handleService(service)}

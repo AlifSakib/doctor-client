@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
 const BookingList = () => {
@@ -38,7 +39,7 @@ const BookingList = () => {
                   Time
                 </th>
                 <th scope="col" className="py-3 px-6">
-                  Price
+                  Payment
                 </th>
               </tr>
             </thead>
@@ -56,7 +57,27 @@ const BookingList = () => {
                   </th>
                   <td className="py-4 px-6">{booking.appointmentDate}</td>
                   <td className="py-4 px-6">{booking.slot}</td>
-                  <td className="py-4 px-6">$2999</td>
+
+                  <td>
+                    {booking.price && !booking.paid && (
+                      <Link to={`/dashboard/payment/${booking._id}`}>
+                        <button
+                          type="button"
+                          className=" w-full inline-block px-6 py-2.5 bg-green-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out"
+                        >
+                          Pay
+                        </button>
+                      </Link>
+                    )}
+                    {booking.price && booking.paid && (
+                      <button
+                        type="button"
+                        className=" w-full inline-block px-6 py-2.5 bg-green-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out"
+                      >
+                        Pay
+                      </button>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>
