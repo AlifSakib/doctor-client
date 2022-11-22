@@ -32,7 +32,7 @@ const Login = () => {
         <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
           <form onSubmit={handleLogin} className="w-full max-w-md">
             <h1 className="text-3xl font-semibold tracking-wide text-center text-gray-800 capitalize md:text-5xl dark:text-white">
-              welcome Back
+              Welcome Back
             </h1>
 
             <div className="relative flex items-center mt-6">
@@ -92,7 +92,7 @@ const Login = () => {
                 type="submit"
                 className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
               >
-                Sign Up
+                Login
               </button>
 
               <div className="mt-6 text-center ">

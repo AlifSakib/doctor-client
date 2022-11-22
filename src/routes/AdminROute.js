@@ -7,7 +7,7 @@ const AdminROute = ({ children }) => {
   const location = useLocation();
   const { user, loading } = useContext(AuthContext);
   const [isAdmin, isAdminLoading] = useAdmin(user?.email);
-  if (loading && isAdminLoading) {
+  if (loading || isAdminLoading) {
     return <div>Loading</div>;
   }
 
