@@ -32,7 +32,7 @@ const BookingModal = ({
 
     console.log(bookingDetails);
 
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://server-alifsakib.vercel.app/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",

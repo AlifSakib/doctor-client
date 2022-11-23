@@ -9,7 +9,7 @@ const BookingList = () => {
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/booking-details?email=${user?.email}`,
+        `https://server-alifsakib.vercel.app/booking-details?email=${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,

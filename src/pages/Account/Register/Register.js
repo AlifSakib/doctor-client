@@ -45,7 +45,7 @@ const Register = () => {
             })
               .then(() => {
                 toast.success("Profile Updated");
-                fetch("http://localhost:5000/users", {
+                fetch("https://server-alifsakib.vercel.app/users", {
                   method: "POST",
                   headers: {
                     "content-type": "application/json",

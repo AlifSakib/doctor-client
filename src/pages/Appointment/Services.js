@@ -20,7 +20,7 @@ const Services = ({ selected, setSelected }) => {
     queryKey: ["services", date],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/appointments?date=${date}`
+        `https://server-alifsakib.vercel.app/appointments?date=${date}`
       );
       const data = await res.json();
       return data;
